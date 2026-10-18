@@ -2,7 +2,8 @@
 
 A implementar seguindo o módulo de referência `app/modules/instituicoes`
 (models.py → schemas.py → repository.py → service.py → router.py).
-Cards no Trello: Cadastro de pessoa e Privacidade LGPD (Anderson) · Admin define perfil (Pedro).
+Cards no Trello: Cadastro de pessoa e Meu perfil (Pedro) · Privacidade LGPD e Admin define perfil
+— fora do MVP de 14/11.
 Ver docs/BACKLOG.md e docs/08-dependencias.md.
 """
 

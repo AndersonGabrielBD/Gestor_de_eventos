@@ -1,7 +1,7 @@
 """Módulo 10 — Consulta de auditoria (RF-011, UC11, tela T05).
 
 O registro já está pronto em `service.py`. Falta a consulta/exportação.
-Card no Trello: Auditoria: consulta e exportação (Pedro).
+Card no Trello: Auditoria: consulta dos logs (José).
 """
 
 from fastapi import APIRouter

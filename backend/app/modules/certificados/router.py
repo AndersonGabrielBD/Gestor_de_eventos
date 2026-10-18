@@ -4,8 +4,8 @@ Telas: T04, T12, T16, T17.
 
 A implementar seguindo o módulo de referência `app/modules/instituicoes`
 (models.py → schemas.py → repository.py → service.py → router.py).
-Cards no Trello: Tipos de certificado (Pedro) · Apuração, Emissão em lote e Reemissão (José) · Meus
-certificados e validação (Thayná).
+Cards no Trello: Apuração e Emissão em lote (José) · Meus certificados e validação (Thayná).
+Tipos de certificado (vêm do seed) e Reemissão ficaram fora do MVP de 14/11.
 Ver docs/BACKLOG.md e docs/08-dependencias.md.
 """
 

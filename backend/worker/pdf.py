@@ -1,5 +1,5 @@
 """Geração do PDF do certificado (RNF-010, RN 6.1/6.2).
-Card no Trello: Motor de PDF/A do certificado (José, S2).
+Card no Trello: Motor de PDF/A do certificado (José, S1).
 
 Pipeline: template HTML → WeasyPrint (PDF) → QR Code embutido → pikepdf (metadados
 PDF/A) → SHA-256 do arquivo. As importações ficam dentro das funções porque

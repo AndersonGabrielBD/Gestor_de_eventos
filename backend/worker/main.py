@@ -4,7 +4,7 @@ Consome `job_certificado` usando `FOR UPDATE SKIP LOCKED`, o que permite rodar
 várias instâncias em paralelo sem processar o mesmo job duas vezes.
 
 Executar:  python -m worker.main   (ou `docker compose up worker`)
-Cards no Trello: Motor de PDF/A (S2) e Emissão em lote (S5) — José.
+Cards no Trello: Motor de PDF/A (S1) e Emissão em lote (S2 base, S4 integração) — José.
 """
 
 import asyncio

@@ -2,6 +2,8 @@
 
 Pontos encontrados na leitura do PDF que precisam de decisão antes (ou durante) a implementação. Cada item tem uma **sugestão** para não travar o desenvolvimento.
 
+> ⚠️ **Pendente de aprovação do professor: escopo do MVP para 14/11/2026.** Com 4 semanas até a entrega, o plano cobre só o fluxo principal (criar evento → inscrever → check-in → emitir → validar). A lista do que ficou de fora está em [BACKLOG.md](BACKLOG.md) (seção "Fora do MVP"). Responsável por levar a pergunta: José (card "Validar regras de negócio", até qua 21/10).
+
 | # | Lacuna | Impacto | Sugestão adotada até decisão |
 |---|---|---|---|
 | 1 | As **Regras de Negócio (RN x.y)** são citadas, mas não definidas no PDF. | Alto — validações dependem delas | Reconstruídas em `04-regras-de-negocio.md`; validar as marcadas 🟡. |
