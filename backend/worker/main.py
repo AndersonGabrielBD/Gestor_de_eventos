@@ -4,7 +4,7 @@ Consome `job_certificado` usando `FOR UPDATE SKIP LOCKED`, o que permite rodar
 várias instâncias em paralelo sem processar o mesmo job duas vezes.
 
 Executar:  python -m worker.main   (ou `docker compose up worker`)
-Backlog: GE-105 (fila), GE-106 (PDF/A), GE-107 (Storage).
+Cards no Trello: Motor de PDF/A (S2) e Emissão em lote (S5) — José.
 """
 
 import asyncio
@@ -36,11 +36,13 @@ _SQL_PEGAR_JOB = text(
 
 
 async def processar_job(job) -> None:
-    """TODO (GE-106): para cada elegível do payload, gerar o PDF/A com
+    """TODO (card Emissão em lote): para cada elegível do payload, gerar o PDF/A com
     `worker.pdf.gerar_certificado_pdf`, enviar ao Storage, gravar `certificado`
     e registrar `certificado_emitido` na auditoria (responsável = Sistema)."""
     logger.info("Processando job %s (%s) do evento %s", job.id, job.tipo, job.evento_id)
-    raise NotImplementedError("Geração de certificados ainda não implementada (GE-106)")
+    raise NotImplementedError(
+        "Geração de certificados ainda não implementada (card Emissão em lote)"
+    )
 
 
 async def executar_uma_vez() -> bool:

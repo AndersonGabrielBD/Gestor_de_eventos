@@ -16,7 +16,8 @@ Plataforma para planejar, executar e certificar eventos acadêmicos: coordenador
 | [05 — API](docs/05-api.md) | Endpoints planejados |
 | [06 — Frontend](docs/06-frontend.md) | Rotas e telas T01–T17 |
 | [07 — Lacunas e perguntas](docs/07-lacunas-e-perguntas.md) | O que o PDF não define |
-| [**Backlog**](docs/BACKLOG.md) | Épicos, itens GE-xxx, sprints |
+| [**Backlog**](docs/BACKLOG.md) | Cards por sprint e responsáveis (espelho do Trello) |
+| [**08 — Dependências**](docs/08-dependencias.md) | Quem depende de quem, por sprint, e prazos de entrega entre a equipe |
 
 ## Stack
 
@@ -41,7 +42,7 @@ npx supabase start
 
 Aplica `supabase/migrations` e `supabase/seed.sql`. Ao final, o comando mostra a `API URL`, a chave `anon`/publishable e o segredo JWT — use-os nos `.env` abaixo. Para recriar o banco do zero: `npx supabase db reset`. Painel: http://127.0.0.1:54323.
 
-> Alternativa: usar um projeto Supabase na nuvem compartilhado pela equipe (GE-006) e aplicar as migrations com `npx supabase link` + `npx supabase db push`.
+> Alternativa: usar um projeto Supabase na nuvem compartilhado pela equipe (card "Ambiente da equipe") e aplicar as migrations com `npx supabase link` + `npx supabase db push`.
 
 ### 2. Backend
 

@@ -4,7 +4,7 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../auth/AuthProvider";
 import { supabase } from "../lib/supabase";
 
-/** T01 — Login (UC00). Cadastro e recuperação de senha: GE-025. */
+/** T01 — Login (UC00). Cadastro e recuperação de senha: card "Login, cadastro e recuperação de senha". */
 export function LoginPage() {
   const { session } = useAuth();
   const navigate = useNavigate();

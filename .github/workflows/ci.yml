@@ -21,7 +21,7 @@ jobs:
       - run: ruff check .
       - run: ruff format --check .
       - run: pytest --cov --cov-report=term-missing
-        # GE-130: adicionar --cov-fail-under=70 quando os módulos estiverem implementados
+        # Card "Teste E2E + cobertura 70%": adicionar --cov-fail-under=70 quando os módulos estiverem implementados
 
   frontend:
     runs-on: ubuntu-latest

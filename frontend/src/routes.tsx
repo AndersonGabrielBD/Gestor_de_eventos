@@ -11,37 +11,37 @@ interface Tela {
   path: string;
   tela: string;
   titulo: string;
-  backlog: string;
+  card: string; // card do Trello responsável pela tela
   perfil?: Perfil; // ausente = rota pública
 }
 
 const TELAS: Tela[] = [
-  { path: "/cadastro", tela: "T01", titulo: "Cadastro", backlog: "GE-025" },
-  { path: "/recuperar-senha", tela: "T01", titulo: "Recuperar senha", backlog: "GE-025" },
-  { path: "/eventos", tela: "T13", titulo: "Catálogo de eventos", backlog: "GE-079" },
-  { path: "/eventos/:id", tela: "T13", titulo: "Detalhe do evento", backlog: "GE-079" },
-  { path: "/validar", tela: "T17", titulo: "Validação pública", backlog: "GE-10F" },
-  { path: "/validar/:codigo", tela: "T17", titulo: "Validação pública", backlog: "GE-10F" },
+  { path: "/cadastro", tela: "T01", titulo: "Cadastro", card: "Login, cadastro e recuperação de senha (Anderson)" },
+  { path: "/recuperar-senha", tela: "T01", titulo: "Recuperar senha", card: "Login, cadastro e recuperação de senha (Anderson)" },
+  { path: "/eventos", tela: "T13", titulo: "Catálogo de eventos", card: "Catálogo de eventos (José)" },
+  { path: "/eventos/:id", tela: "T13", titulo: "Detalhe do evento", card: "Catálogo de eventos (José)" },
+  { path: "/validar", tela: "T17", titulo: "Validação pública", card: "Meus certificados e validação pública (Thayná)" },
+  { path: "/validar/:codigo", tela: "T17", titulo: "Validação pública", card: "Meus certificados e validação pública (Thayná)" },
 
-  { path: "/painel", tela: "T02", titulo: "Painel", backlog: "GE-114", perfil: "participante" },
-  { path: "/perfil", tela: "—", titulo: "Meu perfil", backlog: "GE-064", perfil: "participante" },
-  { path: "/eventos/:id/inscricao", tela: "T14", titulo: "Inscrição", backlog: "GE-07A", perfil: "participante" },
-  { path: "/minhas-inscricoes", tela: "T15", titulo: "Minhas inscrições", backlog: "GE-07B", perfil: "participante" },
-  { path: "/meus-certificados", tela: "T16", titulo: "Meus certificados", backlog: "GE-10E", perfil: "participante" },
+  { path: "/painel", tela: "T02", titulo: "Painel", card: "Dashboard por perfil (Anderson)", perfil: "participante" },
+  { path: "/perfil", tela: "—", titulo: "Meu perfil", card: "Cadastro de pessoa e Meu perfil (Anderson)", perfil: "participante" },
+  { path: "/eventos/:id/inscricao", tela: "T14", titulo: "Inscrição", card: "Tela de inscrição (Thayná)", perfil: "participante" },
+  { path: "/minhas-inscricoes", tela: "T15", titulo: "Minhas inscrições", card: "Minhas inscrições (Pedro)", perfil: "participante" },
+  { path: "/meus-certificados", tela: "T16", titulo: "Meus certificados", card: "Meus certificados e validação pública (Thayná)", perfil: "participante" },
 
-  { path: "/coordenacao/eventos", tela: "T07", titulo: "Meus eventos", backlog: "GE-037", perfil: "coordenador" },
-  { path: "/coordenacao/eventos/novo", tela: "T07", titulo: "Novo evento", backlog: "GE-038", perfil: "coordenador" },
-  { path: "/coordenacao/eventos/:id", tela: "T07", titulo: "Editar evento", backlog: "GE-038", perfil: "coordenador" },
-  { path: "/coordenacao/eventos/:id/coordenadores", tela: "T08", titulo: "Coordenadores", backlog: "GE-039", perfil: "coordenador" },
-  { path: "/coordenacao/eventos/:id/atividades", tela: "T09", titulo: "Programação", backlog: "GE-055", perfil: "coordenador" },
-  { path: "/coordenacao/eventos/:id/inscritos", tela: "T10", titulo: "Inscritos", backlog: "GE-07C", perfil: "coordenador" },
-  { path: "/coordenacao/eventos/:id/presenca", tela: "T11", titulo: "Check-in / Presença", backlog: "GE-095, GE-096", perfil: "coordenador" },
-  { path: "/coordenacao/eventos/:id/certificados", tela: "T12", titulo: "Emissão de certificados", backlog: "GE-10D", perfil: "coordenador" },
-  { path: "/relatorios", tela: "T06", titulo: "Relatórios", backlog: "GE-112", perfil: "coordenador" },
+  { path: "/coordenacao/eventos", tela: "T07", titulo: "Meus eventos", card: "Criar e gerenciar evento (Anderson)", perfil: "coordenador" },
+  { path: "/coordenacao/eventos/novo", tela: "T07", titulo: "Novo evento", card: "Criar e gerenciar evento (Anderson)", perfil: "coordenador" },
+  { path: "/coordenacao/eventos/:id", tela: "T07", titulo: "Editar evento", card: "Criar e gerenciar evento (Anderson)", perfil: "coordenador" },
+  { path: "/coordenacao/eventos/:id/coordenadores", tela: "T08", titulo: "Coordenadores", card: "Coordenadores do evento (Thayná)", perfil: "coordenador" },
+  { path: "/coordenacao/eventos/:id/atividades", tela: "T09", titulo: "Programação", card: "Programação / Atividades (Pedro)", perfil: "coordenador" },
+  { path: "/coordenacao/eventos/:id/inscritos", tela: "T10", titulo: "Inscritos", card: "Gestão de inscritos (Pedro)", perfil: "coordenador" },
+  { path: "/coordenacao/eventos/:id/presenca", tela: "T11", titulo: "Check-in / Presença", card: "Check-in e presença (Thayná)", perfil: "coordenador" },
+  { path: "/coordenacao/eventos/:id/certificados", tela: "T12", titulo: "Emissão de certificados", card: "Apuração final e Emissão em lote (José)", perfil: "coordenador" },
+  { path: "/relatorios", tela: "T06", titulo: "Relatórios", card: "Relatórios oficiais (Pedro)", perfil: "coordenador" },
 
-  { path: "/admin/instituicoes", tela: "T03", titulo: "Instituições e unidades", backlog: "GE-044", perfil: "administrador" },
-  { path: "/admin/tipos-certificado", tela: "T04", titulo: "Tipos de certificado", backlog: "GE-101", perfil: "administrador" },
-  { path: "/admin/auditoria", tela: "T05", titulo: "Auditoria", backlog: "GE-085", perfil: "administrador" },
+  { path: "/admin/instituicoes", tela: "T03", titulo: "Instituições e unidades", card: "Tela de Instituições e Unidades (Thayná)", perfil: "administrador" },
+  { path: "/admin/tipos-certificado", tela: "T04", titulo: "Tipos de certificado", card: "Tela de Tipos de certificado (Pedro)", perfil: "administrador" },
+  { path: "/admin/auditoria", tela: "T05", titulo: "Auditoria", card: "Auditoria (Pedro)", perfil: "administrador" },
 ];
 
 export const routes: RouteObject[] = [

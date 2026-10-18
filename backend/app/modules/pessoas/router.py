@@ -2,7 +2,8 @@
 
 A implementar seguindo o módulo de referência `app/modules/instituicoes`
 (models.py → schemas.py → repository.py → service.py → router.py).
-Backlog: GE-060 a GE-065, GE-121, GE-122 — ver docs/BACKLOG.md e docs/05-api.md.
+Cards no Trello: Cadastro de pessoa e Privacidade LGPD (Anderson) · Admin define perfil (Pedro).
+Ver docs/BACKLOG.md e docs/08-dependencias.md.
 """
 
 from fastapi import APIRouter

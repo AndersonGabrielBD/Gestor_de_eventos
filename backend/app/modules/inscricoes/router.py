@@ -2,7 +2,8 @@
 
 A implementar seguindo o módulo de referência `app/modules/instituicoes`
 (models.py → schemas.py → repository.py → service.py → router.py).
-Backlog: GE-070 a GE-07C — ver docs/BACKLOG.md e docs/05-api.md.
+Cards no Trello: Tela de inscrição (Thayná) · Minhas inscrições e Gestão de inscritos (Pedro).
+Ver docs/BACKLOG.md e docs/08-dependencias.md.
 """
 
 from fastapi import APIRouter
