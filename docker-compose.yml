@@ -1,0 +1,21 @@
+# API e worker em containers. O banco é o Supabase (local via `npx supabase start` ou na nuvem).
+# Dentro do container, o Supabase local fica em host.docker.internal.
+services:
+  api:
+    build: ./backend
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: ${DATABASE_URL_DOCKER:-postgresql+asyncpg://postgres:postgres@host.docker.internal:54322/postgres}
+    ports:
+      - "8000:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  worker:
+    build: ./backend
+    command: ["python", "-m", "worker.main"]
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: ${DATABASE_URL_DOCKER:-postgresql+asyncpg://postgres:postgres@host.docker.internal:54322/postgres}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
