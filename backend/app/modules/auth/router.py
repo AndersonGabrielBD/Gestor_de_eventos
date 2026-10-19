@@ -26,5 +26,5 @@ async def me(usuario: UsuarioDep) -> Eu:
         email=usuario.email,
         pessoa_id=usuario.pessoa_id,
         perfil=usuario.perfil,
-        cadastro_completo=usuario.pessoa_id is not None,
+        cadastro_completo=usuario.cadastro_completo,
     )

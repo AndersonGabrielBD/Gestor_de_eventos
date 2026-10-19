@@ -4,7 +4,7 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../auth/AuthProvider";
 import { supabase } from "../lib/supabase";
 
-/** T01 — Login (UC00). Cadastro e recuperação de senha: card "Login, cadastro e recuperação de senha". */
+/** T01 — Login (UC00). Cadastro: CadastroPage · recuperação: RecuperarSenhaPage. */
 export function LoginPage() {
   const { session } = useAuth();
   const navigate = useNavigate();
@@ -25,7 +25,11 @@ export function LoginPage() {
     const { error } = await supabase.auth.signInWithPassword({ email, password: senha });
     setEnviando(false);
     if (error) {
-      setErro("E-mail ou senha inválidos."); // UC00 E1
+      setErro(
+        error.code === "email_not_confirmed"
+          ? "Confirme seu e-mail antes de entrar (veja o link que enviamos)."
+          : "E-mail ou senha inválidos.", // UC00 E1
+      );
       return;
     }
     navigate(destino, { replace: true });

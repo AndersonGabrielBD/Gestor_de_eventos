@@ -3,8 +3,11 @@ import { Navigate, type RouteObject } from "react-router";
 import { type Perfil } from "./auth/AuthProvider";
 import { RequireAuth } from "./auth/RequireAuth";
 import { AppLayout } from "./layouts/AppLayout";
+import { CadastroPage } from "./pages/CadastroPage";
 import { EmConstrucao, NaoEncontrado } from "./pages/EmConstrucao";
 import { LoginPage } from "./pages/LoginPage";
+import { RecuperarSenhaPage } from "./pages/RecuperarSenhaPage";
+import { RedefinirSenhaPage } from "./pages/RedefinirSenhaPage";
 
 /** Mapa de telas — docs/06-frontend.md. */
 interface Tela {
@@ -16,8 +19,6 @@ interface Tela {
 }
 
 const TELAS: Tela[] = [
-  { path: "/cadastro", tela: "T01", titulo: "Cadastro", card: "Login, cadastro e recuperação de senha (Anderson)" },
-  { path: "/recuperar-senha", tela: "T01", titulo: "Recuperar senha", card: "Login, cadastro e recuperação de senha (Anderson)" },
   { path: "/eventos", tela: "T13", titulo: "Catálogo de eventos", card: "Catálogo de eventos (Thayná)" },
   { path: "/eventos/:id", tela: "T13", titulo: "Detalhe do evento", card: "Catálogo de eventos (Thayná)" },
   { path: "/validar", tela: "T17", titulo: "Validação pública", card: "Meus certificados e validação pública (Thayná)" },
@@ -50,6 +51,9 @@ export const routes: RouteObject[] = [
     children: [
       { index: true, element: <Navigate to="/eventos" replace /> },
       { path: "/login", element: <LoginPage /> },
+      { path: "/cadastro", element: <CadastroPage /> },
+      { path: "/recuperar-senha", element: <RecuperarSenhaPage /> },
+      { path: "/redefinir-senha", element: <RedefinirSenhaPage /> },
       ...TELAS.map(({ path, perfil, ...tela }) => {
         const pagina = <EmConstrucao {...tela} />;
         return {

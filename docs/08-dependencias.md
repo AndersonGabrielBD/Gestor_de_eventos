@@ -124,7 +124,7 @@ Estes prazos são o que permite várias pessoas trabalharem na mesma semana em c
 | Pessoa e "Meu perfil" | Pedro | Login ⚠️ (trigger da `pessoa`, qua 21/10) | Anderson (Criar evento) · Pedro (Atividades) · Thayná (Inscrição) — sex 23/10 |
 | Validar RNs + MVP com o professor | José | — | Todos — qua 21/10 |
 | Deploy + CORS/headers | José | Ambiente ⚠️ (Supabase dev, ter 20/10) | Ambiente de demonstração |
-| Motor de PDF/A | José | Ambiente ⚠️ (worker em Docker) — **use dados falsos** | José (Emissão, S2) · Thayná (Meus certificados, S4) |
+| Motor de PDF/A | José | Nenhuma: o próprio José valida o worker no Docker — **use dados falsos** | José (Emissão, S2) · Thayná (Meus certificados, S4) |
 
 ### S2 — 26/10 a 01/11
 
@@ -205,7 +205,7 @@ sex ─ José liga a apuração na presença real │ todos fecham PRs
 
 | Risco | Impacto | Plano B |
 |---|---|---|
-| Supabase dev atrasar (ter 20/10) | Ninguém roda o sistema completo | Cada um usa `npx supabase start` local |
+| ~~Supabase dev atrasar (ter 20/10)~~ | ✅ Projeto criado e migrations aplicadas em 19/10 | — |
 | Professor não aceitar o MVP (qua 21/10) | Replanejar cortes | Trazer de volta só o que ele exigir; tirar da lista de "se atrasar, cortar" em [BACKLOG.md](BACKLOG.md) (seção Capacidade) |
 | Criar evento atrasar (S2) | Atividades, Catálogo e toda a S3 | Anderson entrega os models na terça mesmo sem tela |
 | Inscrição atrasar (S3) | Gestão, Check-in e Apuração na mesma semana | Combinar o JSON no domingo 01/11 e todos trabalham com mock até terça |

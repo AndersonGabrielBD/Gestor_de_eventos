@@ -30,19 +30,24 @@ supabase/   migrations (fonte da verdade do schema), seed e config local
 docs/       documentação e backlog
 ```
 
-## Como rodar localmente
+## Como rodar
 
-Pré-requisitos: Python 3.12, Node 22, Docker Desktop.
+Pré-requisitos: Python 3.12 e Node 22. O banco é o **projeto Supabase da equipe na nuvem**, então não precisa de Docker. O Docker só é usado pelo worker de certificados (veja o passo 4).
 
-### 1. Banco (Supabase local)
+### 1. Chaves do projeto Supabase
 
-```bash
-npx supabase start
-```
+Peça ao Anderson as chaves do projeto dev. Elas são enviadas por canal seguro e **nunca vão para o Git**. Você vai precisar de:
 
-Aplica `supabase/migrations` e `supabase/seed.sql`. Ao final, o comando mostra a `API URL`, a chave `anon`/publishable e o segredo JWT — use-os nos `.env` abaixo. Para recriar o banco do zero: `npx supabase db reset`. Painel: http://127.0.0.1:54323.
+| Variável | Onde fica no painel do Supabase | Vai em |
+|---|---|---|
+| `SUPABASE_URL` / `VITE_SUPABASE_URL` | Project Settings → API → Project URL | backend e frontend |
+| `VITE_SUPABASE_ANON_KEY` | Project Settings → API Keys → `anon` / publishable | frontend |
+| `SUPABASE_SERVICE_ROLE_KEY` | Project Settings → API Keys → `service_role` / secret (**só no backend**) | backend |
+| `DATABASE_URL` | Connect → **Session pooler** (porta 5432), trocando `postgresql://` por `postgresql+asyncpg://` | backend |
 
-> Alternativa: usar um projeto Supabase na nuvem compartilhado pela equipe (card "Ambiente da equipe") e aplicar as migrations com `npx supabase link` + `npx supabase db push`.
+`SUPABASE_JWT_SECRET` fica vazio: o projeto assina os tokens com ES256 e a API valida pelas chaves públicas (JWKS).
+
+⚠️ `CHAVE_CIFRAGEM_DADOS` e `CHAVE_HMAC_DADOS` também vêm do Anderson e **precisam ser as mesmas para todos**. O banco é compartilhado, e um CPF cifrado com uma chave não abre com outra.
 
 ### 2. Backend
 
@@ -64,7 +69,18 @@ pytest --cov
 ruff check . && ruff format --check .
 ```
 
-### 3. Worker de certificados
+### 3. Frontend
+
+```bash
+cd frontend
+npm install
+copy .env.example .env.local    # preencha VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY
+npm run dev
+```
+
+App em http://localhost:5173.
+
+### 4. Worker de certificados (só quem mexe em PDF)
 
 WeasyPrint precisa de bibliotecas de sistema, então o worker roda em Docker:
 
@@ -72,29 +88,37 @@ WeasyPrint precisa de bibliotecas de sistema, então o worker roda em Docker:
 docker compose up worker
 ```
 
-### 4. Frontend
+Com o banco na nuvem, defina `DATABASE_URL_DOCKER` com a mesma `DATABASE_URL` do `.env`.
+
+### Usuários de teste
+
+O projeto dev tem um usuário de cada perfil (administrador, coordenador, participante), criados com:
 
 ```bash
-cd frontend
-npm install
-copy .env.example .env.local    # preencha VITE_SUPABASE_ANON_KEY
-npm run dev
+cd backend
+python -m scripts.criar_usuarios_teste
 ```
 
-App em http://localhost:5173.
+Os e-mails estão em `backend/scripts/criar_usuarios_teste.py`. A senha é compartilhada pelo Anderson.
 
-### Criar o primeiro administrador
+## Banco de dados (Supabase)
 
-1. Crie um usuário pelo painel do Supabase (Authentication → Add user).
-2. No SQL Editor, crie a pessoa vinculada:
-   ```sql
-   insert into pessoa (user_id, nome, email, perfil, categoria, consentimento_lgpd_em)
-   select id, 'Admin', email, 'administrador', 'tecnico', now() from auth.users where email = 'seu@email.com';
-   ```
+- **Schema:** `supabase/migrations` é a fonte da verdade (ADR-01). Toda conta criada no Auth ganha uma `pessoa` com perfil participante por trigger (`20261019000000_auth_cria_pessoa.sql`).
+- **Mudança no banco:** `npx supabase migration new <nome>`, escreva o SQL e atualize o model SQLAlchemy correspondente. **Não altere migrations já aplicadas**, crie uma nova.
+- **Aplicar no projeto dev** (quem tiver acesso ao projeto):
+  ```bash
+  npx supabase login
+  npx supabase link --project-ref <ref-do-projeto>
+  npx supabase db push
+  ```
+- **Configuração do Auth no painel** (Authentication → URL Configuration): Site URL `http://localhost:5173` e, em Redirect URLs, `http://localhost:5173/**` e a URL do deploy. Sem isso os links de confirmação e de recuperação de senha não voltam para o app.
+- **Promover alguém a coordenador ou admin** (no MVP não tem tela, é pelo SQL Editor):
+  ```sql
+  update pessoa set perfil = 'administrador' where email = 'fulano@exemplo.com';
+  ```
 
 ## Fluxo de trabalho da equipe
 
-- Pegue um item do [backlog](docs/BACKLOG.md) e crie a branch `feat/GE-xxx-descricao`.
+- Pegue um card do Trello (ver [backlog](docs/BACKLOG.md)) e crie a branch `feat/<nome-curto-do-card>`.
 - Novo módulo do backend: copie a estrutura de `backend/app/modules/instituicoes` (model → schema → repository → service → router + testes do service).
-- Mudança no banco: `npx supabase migration new <nome>` e escreva o SQL; atualize o model SQLAlchemy correspondente.
 - Abra PR para `main`; o CI (lint + testes + build) precisa passar e um colega revisa.
