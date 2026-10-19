@@ -21,8 +21,10 @@ def perfil_atende(perfil: Perfil, minimo: Perfil) -> bool:
 class UsuarioAtual:
     user_id: UUID
     email: str | None
-    pessoa_id: UUID | None  # nulo enquanto o cadastro da pessoa não foi completado
+    pessoa_id: UUID | None  # criada por trigger no cadastro da conta; nula só se o trigger falhou
     perfil: Perfil
+    # Completou "Meu perfil" (dados + aceite LGPD). Sem isso não pode se inscrever.
+    cadastro_completo: bool = False
 
     @property
     def eh_admin(self) -> bool:

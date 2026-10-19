@@ -32,7 +32,11 @@ async def get_usuario_atual(
     user_id = UUID(claims["sub"])
     linha = (
         await session.execute(
-            text("select id, perfil from public.pessoa where user_id = :uid"), {"uid": user_id}
+            text(
+                "select id, perfil, consentimento_lgpd_em is not null as completo"
+                " from public.pessoa where user_id = :uid"
+            ),
+            {"uid": user_id},
         )
     ).first()
 
@@ -41,6 +45,7 @@ async def get_usuario_atual(
         email=claims.get("email"),
         pessoa_id=linha.id if linha else None,
         perfil=Perfil(linha.perfil) if linha else Perfil.PARTICIPANTE,
+        cadastro_completo=bool(linha and linha.completo),
     )
 
 
