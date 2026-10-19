@@ -45,7 +45,9 @@ Peça ao Anderson as chaves do projeto dev. Elas são enviadas por canal seguro 
 | `SUPABASE_SERVICE_ROLE_KEY` | Project Settings → API Keys → `service_role` / secret (**só no backend**) | backend |
 | `DATABASE_URL` | Connect → **Session pooler** (porta 5432), trocando `postgresql://` por `postgresql+asyncpg://` | backend |
 
-`SUPABASE_JWT_SECRET` pode ficar vazio: a API valida o token pelas chaves públicas (JWKS) do projeto.
+`SUPABASE_JWT_SECRET` fica vazio: o projeto assina os tokens com ES256 e a API valida pelas chaves públicas (JWKS).
+
+⚠️ `CHAVE_CIFRAGEM_DADOS` e `CHAVE_HMAC_DADOS` também vêm do Anderson e **precisam ser as mesmas para todos**. O banco é compartilhado, e um CPF cifrado com uma chave não abre com outra.
 
 ### 2. Backend
 
