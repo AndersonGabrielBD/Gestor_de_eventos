@@ -1,10 +1,14 @@
 from functools import lru_cache
+from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+# backend/.env, de onde quer que a API seja iniciada (raiz do repo, backend/, Docker)
+ARQUIVO_ENV = Path(__file__).resolve().parents[2] / ".env"
+
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(env_file=ARQUIVO_ENV, extra="ignore")
 
     ambiente: str = "dev"
     database_url: str = "postgresql+asyncpg://postgres:postgres@127.0.0.1:54322/postgres"
