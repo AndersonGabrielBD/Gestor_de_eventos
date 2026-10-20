@@ -1,8 +1,13 @@
 import { useState, type FormEvent } from "react";
 import { Link, Navigate } from "react-router";
+import { Alert, Stack, Text } from "@mantine/core";
 
 import { useAuth } from "../auth/AuthProvider";
 import { supabase } from "../lib/supabase";
+import { Botao } from "../components/Botao";
+import { CampoFormulario } from "../components/CampoFormulario";
+import { PageLayout } from "../components/PageLayout";
+import { notificar } from "../components/notificar";
 import { SENHA_MINIMA, validarNovaSenha } from "./senha";
 
 /** T01 — Cadastro de conta (UC00). A `pessoa` é criada por trigger no banco;
@@ -46,83 +51,85 @@ export function CadastroPage() {
       return;
     }
     // Com confirmação de e-mail ligada (padrão no Supabase), não vem sessão.
-    if (!data.session) setAguardandoConfirmacao(true);
+    if (!data.session) {
+      setAguardandoConfirmacao(true);
+      notificar.sucesso("Enviamos um link de confirmação para seu e-mail.");
+    }
   }
 
   if (aguardandoConfirmacao) {
     return (
-      <section className="cartao estreito">
-        <h1>Confirme seu e-mail</h1>
-        <p role="status">
-          Enviamos um link de confirmação para <strong>{email}</strong>. Abra o e-mail e clique no
-          link para ativar sua conta.
-        </p>
-        <p>
+      <PageLayout titulo="Confirme seu e-mail" estreito>
+        <Text component="p" role="status">
+          Enviamos um link de confirmação para <strong>{email}</strong>. Abra o e-mail e clique no link para
+          ativar sua conta.
+        </Text>
+        <Text component="p">
           <Link to="/login">Voltar para o login</Link>
-        </p>
-      </section>
+        </Text>
+      </PageLayout>
     );
   }
 
   return (
-    <section className="cartao estreito">
-      <h1>Criar conta</h1>
+    <PageLayout titulo="Criar conta" estreito>
       <form onSubmit={cadastrar} noValidate>
-        <label htmlFor="nome">Nome completo</label>
-        <input
-          id="nome"
-          autoComplete="name"
-          required
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-        />
+        <Stack gap="md">
+          <CampoFormulario
+            id="nome"
+            label="Nome completo"
+            autoComplete="name"
+            required
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
 
-        <label htmlFor="email">E-mail</label>
-        <input
-          id="email"
-          type="email"
-          autoComplete="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+          <CampoFormulario
+            id="email"
+            label="E-mail"
+            type="email"
+            autoComplete="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-        <label htmlFor="senha">Senha</label>
-        <input
-          id="senha"
-          type="password"
-          autoComplete="new-password"
-          required
-          minLength={SENHA_MINIMA}
-          aria-describedby="dica-senha"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
-        />
-        <small id="dica-senha">Mínimo de {SENHA_MINIMA} caracteres, com letras e números.</small>
+          <CampoFormulario
+            id="senha"
+            label="Senha"
+            type="password"
+            autoComplete="new-password"
+            required
+            minLength={SENHA_MINIMA}
+            dica={`Mínimo de ${SENHA_MINIMA} caracteres, com letras e números.`}
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
 
-        <label htmlFor="confirmacao">Confirme a senha</label>
-        <input
-          id="confirmacao"
-          type="password"
-          autoComplete="new-password"
-          required
-          value={confirmacao}
-          onChange={(e) => setConfirmacao(e.target.value)}
-        />
+          <CampoFormulario
+            id="confirmacao"
+            label="Confirme a senha"
+            type="password"
+            autoComplete="new-password"
+            required
+            value={confirmacao}
+            onChange={(e) => setConfirmacao(e.target.value)}
+          />
 
-        {erro && (
-          <p role="alert" className="erro">
-            {erro}
-          </p>
-        )}
+          {erro && (
+            <Alert color="erro" role="alert">
+              {erro}
+            </Alert>
+          )}
 
-        <button type="submit" disabled={enviando}>
-          {enviando ? "Criando conta…" : "Criar conta"}
-        </button>
+          <Botao type="submit" carregando={enviando}>
+            Criar conta
+          </Botao>
+        </Stack>
       </form>
-      <p>
+      <Text component="p" mt="lg">
         Já tem conta? <Link to="/login">Entrar</Link>
-      </p>
-    </section>
+      </Text>
+    </PageLayout>
   );
 }

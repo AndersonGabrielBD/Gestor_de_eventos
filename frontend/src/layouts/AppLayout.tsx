@@ -1,4 +1,15 @@
 import { NavLink, Outlet } from "react-router";
+import {
+  AppShell,
+  Burger,
+  Button,
+  Group,
+  NavLink as MantineNavLink,
+  ScrollArea,
+  Stack,
+  Text,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 
 import { perfilAtende, useAuth, type Perfil } from "../auth/AuthProvider";
 
@@ -24,6 +35,7 @@ const MENU: ItemMenu[] = [
 
 export function AppLayout() {
   const { session, eu, sair } = useAuth();
+  const [aberto, { toggle, close }] = useDisclosure();
   const itens = MENU.filter((i) => !i.perfil || (session && perfilAtende(eu?.perfil, i.perfil)));
 
   return (
@@ -31,28 +43,49 @@ export function AppLayout() {
       <a className="pular-conteudo" href="#conteudo">
         Pular para o conteúdo
       </a>
-      <header className="topo">
-        <strong>Gestão de Eventos</strong>
-        <nav aria-label="Principal">
-          <ul>
-            {itens.map((item) => (
-              <li key={item.rota}>
-                <NavLink to={item.rota}>{item.rotulo}</NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        {session ? (
-          <button type="button" onClick={sair}>
-            Sair
-          </button>
-        ) : (
-          <NavLink to="/login">Entrar</NavLink>
-        )}
-      </header>
-      <main id="conteudo" tabIndex={-1}>
-        <Outlet />
-      </main>
+      <AppShell
+        header={{ height: 64 }}
+        navbar={{ width: 280, breakpoint: "sm", collapsed: { mobile: !aberto } }}
+        padding={0}
+      >
+        <AppShell.Header>
+          <Group h="100%" px="md" justify="space-between">
+            <Group>
+              <Burger opened={aberto} onClick={toggle} hiddenFrom="sm" size="sm" aria-label="Alternar menu" />
+              <Text fw={700}>Gestão de Eventos</Text>
+            </Group>
+            {session ? (
+              <Button variant="subtle" onClick={sair}>
+                Sair
+              </Button>
+            ) : (
+              <Button component={NavLink} to="/login" variant="subtle">
+                Entrar
+              </Button>
+            )}
+          </Group>
+        </AppShell.Header>
+        <AppShell.Navbar p="md">
+          <AppShell.Section grow component={ScrollArea}>
+            <nav aria-label="Principal">
+              <Stack gap={4}>
+                {itens.map((item) => (
+                  <MantineNavLink
+                    key={item.rota}
+                    component={NavLink}
+                    to={item.rota}
+                    label={item.rotulo}
+                    onClick={close}
+                  />
+                ))}
+              </Stack>
+            </nav>
+          </AppShell.Section>
+        </AppShell.Navbar>
+        <AppShell.Main id="conteudo" tabIndex={-1}>
+          <Outlet />
+        </AppShell.Main>
+      </AppShell>
     </>
   );
 }

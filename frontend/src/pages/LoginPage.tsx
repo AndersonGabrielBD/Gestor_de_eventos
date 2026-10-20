@@ -1,8 +1,12 @@
 import { useState, type FormEvent } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router";
+import { Alert, Stack, Text } from "@mantine/core";
 
 import { useAuth } from "../auth/AuthProvider";
 import { supabase } from "../lib/supabase";
+import { Botao } from "../components/Botao";
+import { CampoFormulario } from "../components/CampoFormulario";
+import { PageLayout } from "../components/PageLayout";
 
 /** T01 — Login (UC00). Cadastro: CadastroPage · recuperação: RecuperarSenhaPage. */
 export function LoginPage() {
@@ -36,45 +40,43 @@ export function LoginPage() {
   }
 
   return (
-    <section className="cartao estreito">
-      <h1>Entrar</h1>
+    <PageLayout titulo="Entrar" estreito>
       <form onSubmit={entrar} noValidate>
-        <label htmlFor="email">E-mail</label>
-        <input
-          id="email"
-          type="email"
-          autoComplete="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          aria-describedby={erro ? "erro-login" : undefined}
-        />
+        <Stack gap="md">
+          <CampoFormulario
+            id="email"
+            label="E-mail"
+            type="email"
+            autoComplete="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-        <label htmlFor="senha">Senha</label>
-        <input
-          id="senha"
-          type="password"
-          autoComplete="current-password"
-          required
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
-          aria-describedby={erro ? "erro-login" : undefined}
-        />
+          <CampoFormulario
+            id="senha"
+            label="Senha"
+            type="password"
+            autoComplete="current-password"
+            required
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
 
-        {erro && (
-          <p id="erro-login" role="alert" className="erro">
-            {erro}
-          </p>
-        )}
+          {erro && (
+            <Alert color="erro" role="alert">
+              {erro}
+            </Alert>
+          )}
 
-        <button type="submit" disabled={enviando}>
-          {enviando ? "Entrando…" : "Entrar"}
-        </button>
+          <Botao type="submit" carregando={enviando}>
+            Entrar
+          </Botao>
+        </Stack>
       </form>
-      <p>
-        <Link to="/recuperar-senha">Esqueci minha senha</Link> ·{" "}
-        <Link to="/cadastro">Cadastre-se</Link>
-      </p>
-    </section>
+      <Text component="p" mt="lg">
+        <Link to="/recuperar-senha">Esqueci minha senha</Link> · <Link to="/cadastro">Cadastre-se</Link>
+      </Text>
+    </PageLayout>
   );
 }

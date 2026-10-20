@@ -91,6 +91,9 @@ Supabase já cifra o disco (AES-256). Para RNF-007, o CPF é guardado cifrado (`
 **[ADR-07] Worker roda em Docker.**
 WeasyPrint depende de Pango/GTK, que é difícil de instalar no Windows. A API roda nativamente; o worker roda via `docker compose up worker`.
 
+**[ADR-08] Kit visual do frontend baseado em Mantine.**
+O frontend adota Mantine em tema exclusivamente claro, com azul institucional `#0B5394`, tipografia de sistema e componentes acessíveis. O ponto de entrada fornece `MantineProvider`, `ModalsProvider` e um único contêiner de notificações. O kit em `frontend/src/components` contém `Botao`, `CampoFormulario`, `Tabela`, `Modal`, `notificar` e `PageLayout`. Novas telas devem consumir esse kit antes de usar primitivas Mantine diretamente; primitivas só são usadas na composição estrutural quando o kit ainda não oferece uma abstração adequada. Isso mantém os contratos visuais e de acessibilidade consistentes sem transformar componentes de domínio em componentes globais.
+
 ## Fluxos transversais
 
 ### Autenticação/Autorização

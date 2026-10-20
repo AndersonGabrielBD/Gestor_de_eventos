@@ -2,19 +2,19 @@
  * da tela ao pegar o item do backlog correspondente. */
 export function EmConstrucao({ tela, titulo, card }: { tela: string; titulo: string; card: string }) {
   return (
-    <section>
-      <h1>
-        {tela} — {titulo}
-      </h1>
-      <p>Tela em construção. Card no Trello: {card}.</p>
-    </section>
+    <PageLayout titulo={`${tela} — ${titulo}`}>
+      <Text>Tela em construção. Card no Trello: {card}.</Text>
+    </PageLayout>
   );
 }
 
 export function NaoEncontrado() {
   return (
-    <section>
-      <h1>Página não encontrada</h1>
-    </section>
+    <PageLayout titulo="Página não encontrada">
+      <Text>Verifique o endereço e tente novamente.</Text>
+    </PageLayout>
   );
 }
+import { Text } from "@mantine/core";
+
+import { PageLayout } from "../components/PageLayout";
