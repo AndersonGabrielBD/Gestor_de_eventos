@@ -12,7 +12,7 @@ Plataforma para planejar, executar e certificar eventos acadêmicos: coordenador
 | [01 — Visão geral](docs/01-visao-geral.md) | Atores, RF/RNF, mapa RF ↔ UC ↔ telas ↔ módulos |
 | [02 — Arquitetura](docs/02-arquitetura.md) | Camadas, stack, decisões (ADRs), fluxos de auth/auditoria/certificados |
 | [03 — Modelo de dados](docs/03-modelo-de-dados.md) | Diagrama ER, tabelas, máquinas de estado |
-| [04 — Regras de negócio](docs/04-regras-de-negocio.md) | RN 1.1–10.3 reconstruídas (⚠️ validar) |
+| [04 — Regras de negócio](docs/04-regras-de-negocio.md) | RN 1.1–10.3 reconstruídas (✅ aprovadas pelo professor) |
 | [05 — API](docs/05-api.md) | Endpoints planejados |
 | [06 — Frontend](docs/06-frontend.md) | Rotas e telas T01–T17 |
 | [07 — Lacunas e perguntas](docs/07-lacunas-e-perguntas.md) | O que o PDF não define |

@@ -10,7 +10,7 @@ O prazo é curto (4 semanas), então o plano é um **MVP do fluxo principal**:
 
 > **criar evento → inscrever → confirmar → check-in → apurar → emitir certificado → validar publicamente**
 
-Tudo que não é essencial para esse fluxo foi para a lista **"✂️ Fora do MVP (depois de 14/11)"** no Trello (ver a seção "Fora do MVP" abaixo). ⚠️ O escopo reduzido **precisa ser aprovado pelo professor** — card "Validar regras de negócio" (José, até 21/10).
+Tudo que não é essencial para esse fluxo foi para a lista **"✂️ Fora do MVP (depois de 14/11)"** no Trello (ver a seção "Fora do MVP" abaixo). ✅ O escopo reduzido **foi aprovado pelo professor em 20/10/2026**, junto com as regras de negócio (ver [07-lacunas-e-perguntas.md](07-lacunas-e-perguntas.md#respostas-do-professor-20102026)). Nenhum card cortado voltou para o MVP.
 
 ## Como ler
 
@@ -75,7 +75,7 @@ Tudo que não é essencial para esse fluxo foi para a lista **"✂️ Fora do MV
 | Biblioteca de componentes acessível + ESLint/Prettier | Infra | I | 3 | Thayná | Fundação |
 | Tela de Instituições e Unidades (T03) — backend pronto ✅ | Feature | E | 4 | Thayná | Login ⚠️ · Componentes ⚠️ |
 | Cadastro de pessoa e "Meu perfil" com consentimento LGPD | Feature | E | 6 | Pedro | Login ⚠️ |
-| Validar regras de negócio, lacunas **e escopo do MVP** com o professor | Doc | E | 1 | José | — |
+| Validar regras de negócio, lacunas **e escopo do MVP** com o professor — **Concluído (20/10)** ✅ | Doc | E | 1 | José | — |
 | Deploy de homologação (API, frontend e worker) + CORS/headers | Infra | I | 4 | José | Ambiente ⚠️ |
 | Motor de PDF/A do certificado (template + QR Code + worker) | Feature | E | 5 | José | Ambiente ⚠️ |
 
