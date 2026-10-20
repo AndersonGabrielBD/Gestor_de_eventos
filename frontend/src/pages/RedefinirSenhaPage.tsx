@@ -1,8 +1,13 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router";
+import { Alert, Stack, Text } from "@mantine/core";
 
 import { useAuth } from "../auth/AuthProvider";
 import { supabase } from "../lib/supabase";
+import { Botao } from "../components/Botao";
+import { CampoFormulario } from "../components/CampoFormulario";
+import { notificar } from "../components/notificar";
+import { PageLayout } from "../components/PageLayout";
 import { SENHA_MINIMA, validarNovaSenha } from "./senha";
 
 /** T01 — Nova senha. O link do e-mail de recuperação abre esta página já com uma
@@ -15,17 +20,21 @@ export function RedefinirSenhaPage() {
   const [erro, setErro] = useState<string | null>(null);
   const [enviando, setEnviando] = useState(false);
 
-  if (carregando) return <p role="status">Carregando…</p>;
+  if (carregando)
+    return (
+      <Text role="status" p="xl">
+        Carregando…
+      </Text>
+    );
 
   if (!session) {
     return (
-      <section className="cartao estreito">
-        <h1>Link inválido ou expirado</h1>
-        <p>Peça um novo link de recuperação de senha.</p>
-        <p>
+      <PageLayout titulo="Link inválido ou expirado" estreito>
+        <Text component="p">Peça um novo link de recuperação de senha.</Text>
+        <Text component="p">
           <Link to="/recuperar-senha">Recuperar senha</Link>
-        </p>
-      </section>
+        </Text>
+      </PageLayout>
     );
   }
 
@@ -46,46 +55,47 @@ export function RedefinirSenhaPage() {
       );
       return;
     }
+    notificar.sucesso("Sua nova senha foi salva.");
     navigate("/painel", { replace: true });
   }
 
   return (
-    <section className="cartao estreito">
-      <h1>Criar nova senha</h1>
+    <PageLayout titulo="Criar nova senha" estreito>
       <form onSubmit={salvar} noValidate>
-        <label htmlFor="senha">Nova senha</label>
-        <input
-          id="senha"
-          type="password"
-          autoComplete="new-password"
-          required
-          minLength={SENHA_MINIMA}
-          aria-describedby="dica-senha"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
-        />
-        <small id="dica-senha">Mínimo de {SENHA_MINIMA} caracteres, com letras e números.</small>
+        <Stack gap="md">
+          <CampoFormulario
+            id="senha"
+            label="Nova senha"
+            type="password"
+            autoComplete="new-password"
+            required
+            minLength={SENHA_MINIMA}
+            dica={`Mínimo de ${SENHA_MINIMA} caracteres, com letras e números.`}
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
 
-        <label htmlFor="confirmacao">Confirme a nova senha</label>
-        <input
-          id="confirmacao"
-          type="password"
-          autoComplete="new-password"
-          required
-          value={confirmacao}
-          onChange={(e) => setConfirmacao(e.target.value)}
-        />
+          <CampoFormulario
+            id="confirmacao"
+            label="Confirme a nova senha"
+            type="password"
+            autoComplete="new-password"
+            required
+            value={confirmacao}
+            onChange={(e) => setConfirmacao(e.target.value)}
+          />
 
-        {erro && (
-          <p role="alert" className="erro">
-            {erro}
-          </p>
-        )}
+          {erro && (
+            <Alert color="erro" role="alert">
+              {erro}
+            </Alert>
+          )}
 
-        <button type="submit" disabled={enviando}>
-          {enviando ? "Salvando…" : "Salvar nova senha"}
-        </button>
+          <Botao type="submit" carregando={enviando}>
+            Salvar nova senha
+          </Botao>
+        </Stack>
       </form>
-    </section>
+    </PageLayout>
   );
 }

@@ -1,23 +1,17 @@
-/* Estilos base provisórios — a biblioteca de componentes será escolhida no card de Componentes (Thayná).
-   Cores com contraste AA (RNF-012). */
 :root {
-  --cor-fundo: #ffffff;
-  --cor-texto: #1a1a1a;
-  --cor-primaria: #0b5394;
-  --cor-erro: #b00020;
-  --cor-borda: #c4c4c4;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.5;
-  color: var(--cor-texto);
-  background: var(--cor-fundo);
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 }
 
-* { box-sizing: border-box; }
-body { margin: 0; }
-
-:focus-visible {
-  outline: 3px solid var(--cor-primaria);
-  outline-offset: 2px;
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
 }
 
 .pular-conteudo {
@@ -27,39 +21,7 @@ body { margin: 0; }
 .pular-conteudo:focus {
   left: 1rem;
   top: 1rem;
-  background: var(--cor-fundo);
+  background: #fff;
   padding: 0.5rem 1rem;
-  z-index: 10;
+  z-index: 1000;
 }
-
-.topo {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--cor-borda);
-}
-.topo nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.topo nav { flex: 1; }
-.topo a { color: var(--cor-primaria); }
-.topo a.active { font-weight: 700; }
-
-main { padding: 1rem; max-width: 72rem; margin: 0 auto; }
-
-.cartao { border: 1px solid var(--cor-borda); border-radius: 8px; padding: 1.5rem; }
-.estreito { max-width: 26rem; margin: 2rem auto; }
-
-form { display: grid; gap: 0.5rem; }
-input, button { font: inherit; padding: 0.6rem; border-radius: 6px; }
-input { border: 1px solid var(--cor-borda); }
-button { background: var(--cor-primaria); color: #fff; border: 0; cursor: pointer; }
-button:disabled { opacity: 0.7; cursor: wait; }
-.erro { color: var(--cor-erro); }

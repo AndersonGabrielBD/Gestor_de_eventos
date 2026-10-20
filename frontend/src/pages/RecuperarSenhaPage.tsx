@@ -1,7 +1,12 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router";
+import { Alert, Stack, Text } from "@mantine/core";
 
 import { supabase } from "../lib/supabase";
+import { Botao } from "../components/Botao";
+import { CampoFormulario } from "../components/CampoFormulario";
+import { notificar } from "../components/notificar";
+import { PageLayout } from "../components/PageLayout";
 
 /** T01 — Esqueci minha senha (UC00). O Supabase Auth envia o e-mail com o link
  * para /redefinir-senha. */
@@ -26,48 +31,49 @@ export function RecuperarSenhaPage() {
       return;
     }
     setEnviado(true);
+    notificar.sucesso("Se houver uma conta, enviamos o link de recuperação.");
   }
 
   if (enviado) {
     return (
-      <section className="cartao estreito">
-        <h1>Verifique seu e-mail</h1>
-        <p role="status">
-          Se houver uma conta para <strong>{email}</strong>, você vai receber um link para criar uma
-          nova senha.
-        </p>
-        <p>
+      <PageLayout titulo="Verifique seu e-mail" estreito>
+        <Text component="p" role="status">
+          Se houver uma conta para <strong>{email}</strong>, você vai receber um link para criar uma nova
+          senha.
+        </Text>
+        <Text component="p">
           <Link to="/login">Voltar para o login</Link>
-        </p>
-      </section>
+        </Text>
+      </PageLayout>
     );
   }
 
   return (
-    <section className="cartao estreito">
-      <h1>Recuperar senha</h1>
+    <PageLayout titulo="Recuperar senha" estreito>
       <form onSubmit={enviar} noValidate>
-        <label htmlFor="email">E-mail da conta</label>
-        <input
-          id="email"
-          type="email"
-          autoComplete="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        {erro && (
-          <p role="alert" className="erro">
-            {erro}
-          </p>
-        )}
-        <button type="submit" disabled={enviando || !email}>
-          {enviando ? "Enviando…" : "Enviar link"}
-        </button>
+        <Stack gap="md">
+          <CampoFormulario
+            id="email"
+            label="E-mail da conta"
+            type="email"
+            autoComplete="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {erro && (
+            <Alert color="erro" role="alert">
+              {erro}
+            </Alert>
+          )}
+          <Botao type="submit" carregando={enviando} disabled={!email}>
+            Enviar link
+          </Botao>
+        </Stack>
       </form>
-      <p>
+      <Text component="p" mt="lg">
         <Link to="/login">Voltar para o login</Link>
-      </p>
-    </section>
+      </Text>
+    </PageLayout>
   );
 }
