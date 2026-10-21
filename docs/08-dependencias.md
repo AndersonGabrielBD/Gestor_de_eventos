@@ -95,7 +95,7 @@ Estes prazos são o que permite várias pessoas trabalharem na mesma semana em c
 | **Ter 20/10** | Anderson | Supabase dev criado + chaves do `.env` (canal seguro, nunca no Git) | Todos · José (Deploy, Motor) |
 | **Qua 21/10** | Anderson | Trigger que cria a `pessoa` + 1 usuário de teste de cada perfil | Pedro (Pessoa) · todos |
 | **Qua 21/10** | Thayná | Biblioteca de componentes instalada + componentes base | Todas as telas |
-| **Qua 21/10** | José | Respostas do professor (RNs + **aprovação do MVP**) no grupo | Todos |
+| ~~**Qua 21/10**~~ ✅ 20/10 | José | Respostas do professor (RNs + **aprovação do MVP**) no grupo — tudo aprovado | Todos |
 | **Sex 23/10** | Pedro | `GET/PUT /pessoas/me` e `GET /pessoas?busca=` | Anderson (Criar evento) · Pedro (Atividades) · Thayná (Inscrição) |
 | **Ter 27/10** | Anderson | Models `Evento`/`CoordenadorEvento` + `POST /eventos` + `GET /eventos/{id}` + helper `exigir_coordenador_do_evento` | Pedro (Atividades) |
 | **Qui 29/10** | Anderson | `GET /eventos` público (só publicados) | Thayná (Catálogo) |
@@ -122,7 +122,7 @@ Estes prazos são o que permite várias pessoas trabalharem na mesma semana em c
 | Componentes + ESLint/Prettier | Thayná | Fundação | Todas as telas — qua 21/10 |
 | Instituições (T03) | Thayná | Login ⚠️ · Componentes · ✅ backend pronto | Anderson (Criar evento) — ✅ endpoints já existem |
 | Pessoa e "Meu perfil" | Pedro | Login ⚠️ (trigger da `pessoa`, qua 21/10) | Anderson (Criar evento) · Pedro (Atividades) · Thayná (Inscrição) — sex 23/10 |
-| Validar RNs + MVP com o professor | José | — | Todos — qua 21/10 |
+| Validar RNs + MVP com o professor ✅ | José | — | Todos — entregue ter 20/10 |
 | Deploy + CORS/headers | José | Ambiente ⚠️ (Supabase dev, ter 20/10) | Ambiente de demonstração |
 | Motor de PDF/A | José | Nenhuma: o próprio José valida o worker no Docker — **use dados falsos** | José (Emissão, S2) · Thayná (Meus certificados, S4) |
 
@@ -206,7 +206,7 @@ sex ─ José liga a apuração na presença real │ todos fecham PRs
 | Risco | Impacto | Plano B |
 |---|---|---|
 | ~~Supabase dev atrasar (ter 20/10)~~ | ✅ Projeto criado e migrations aplicadas em 19/10 | — |
-| Professor não aceitar o MVP (qua 21/10) | Replanejar cortes | Trazer de volta só o que ele exigir; tirar da lista de "se atrasar, cortar" em [BACKLOG.md](BACKLOG.md) (seção Capacidade) |
+| ~~Professor não aceitar o MVP (qua 21/10)~~ | ✅ MVP e regras de negócio aprovados em 20/10 | — |
 | Criar evento atrasar (S2) | Atividades, Catálogo e toda a S3 | Anderson entrega os models na terça mesmo sem tela |
 | Inscrição atrasar (S3) | Gestão, Check-in e Apuração na mesma semana | Combinar o JSON no domingo 01/11 e todos trabalham com mock até terça |
 | Emissão de PDF falhar na S4 | Sem certificado na demo | Certificados já emitidos no seed de demonstração |
